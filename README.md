@@ -86,7 +86,7 @@ predictions = loaded_model.predict(
 Voila! You have your co-crystallization predictions  :tada: 
 
 > [!IMPORTANT]
-> The `deepcocrystal-trained` model provided here is trained only on non-proprietary data to allow a permissive license (560 less API-coformer pairs). The accuracy of this model is 75% and the sensitivity is 70%.
+> The `deepcocrystal-trained` model provided here is trained only on non-proprietary data to allow a academic license (560 less API-coformer pairs). The accuracy of this model is 75% and the sensitivity is 70%.
 
 
 ##  Closing Remarks :fireworks: 
