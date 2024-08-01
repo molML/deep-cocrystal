@@ -26,15 +26,12 @@ python -m pip install .  # install this codebase -- make sure that you are in th
 
 That's it! You have successfully installed our codebase.
 
-## Choose your molecules and prepare your data :thought_balloon:  :pill:
+## Data Preparation and Model Training :pill:
 
-Before using DeepCocrystal, you need to prepare your data. Choose the APIs and coformers for which you want to predict co-crystallization. You have two options for model input:
-
-"1." CANONICAL SMILES :full_moon_with_face:
+Before using DeepCocrystal, you need to format your data into a `.csv` file with three columns: `SMILES1`, `SMILES2`, and **cocrystallization**, which contains the SMILES of the active pharmaceutical ingredients (APIs), coformers, and the observed cocrystallization output, respectively. You can see [train.csv](https://github.com/molML/deep-cocrystal/blob/main/data/train.csv) for an example.
 
 ```python
 from preprocessing import clean_smiles_batch
-
 
 #Import your dataset
 df = pd.read_csv("./data/test.csv") #your file directory 
@@ -57,25 +54,28 @@ coformers = clean_smiles_batch(
 )
 ```
 
-"2." RANDOMIZED SMILES :twisted_rightwards_arrows:
+Afterward, you can use [the code under the examples folder](https://github.com/molML/deep-cocrystal/blob/main/examples/train_and_predict.py) to train your model! :rocket:
 
-Starting from canonical SMILES, you can perform 10-fold SMILES randomization for each molecular pair in your test set, using the code provided [here](https://github.com/EBjerrum/SMILES-enumeration.git). This step will allow you to estimate the uncertainty of the predictions. For further details, please refer to our [paper](https://chemrxiv.org/engage/chemrxiv/article-details/66704f0501103d79c56770b2).
+### SMILES Randomization :twisted_rightwards_arrows:
+
+Starting from canonical SMILES, you can perform SMILES randomization on your data, using the code provided [here](https://github.com/EBjerrum/SMILES-enumeration.git). [We](https://chemrxiv.org/engage/chemrxiv/article-details/66704f0501103d79c56770b2) observed SMILES randomization to strengthen the generalizability of the models and help estimate the prediction uncertainty.
 
 
-## Predict co-crystallization with DeepCocrystal :crystal_ball:
+## Prediction :crystal_ball:
 
-Now that your data are ready, you can predict their co-crystallization by loading our pre-trained model. How? Use the load_and_predict.py script or the following code lines: 
+Now that you have your model (or you can use the DeepCocrystal model available here), you can predict the co-crystallization of any API-coformer pair model. How? Like this:
 
 ```python
 from deepcocrystal import smiles_preprocessing
 
-#pre-trained model loading
+# load the model
 loaded_model = tf.keras.models.load_model("deepcocrystal-trained")
 
+# load the data
 test_api = smiles_preprocessing.space_separate_smiles_list(apis)
 test_coformer = smiles_preprocessing.space_separate_smiles_list(coformers)
 
-#DeepCocrystal prediction
+# predict
 predictions = loaded_model.predict(
     x=[test_api, test_coformer], 
     batch_size = 512,
@@ -83,11 +83,10 @@ predictions = loaded_model.predict(
     )
 ```
 
-Voila! :tada: You have successfully predict the co-crystallization of your API-coformer pairs!
+Voila! You have your co-crystallization predictions  :tada: 
 
-## Additional Informations :warning:
-
-The 'deepcocrystal-trained' model provided here was trained on a smaller dataset compared to the model described in the article to avoid disclosing sensitive industrial data. Consequently, the accuracy (full dataset= 78%, pubblic dataset= 75%) and sensitivity (full dataset= 81%, pubblic dataset= 70%) of this model are slightly lower than those reported in the paper (sorry about that). If you have additional data and wish to retrain DeepCocrystal, you can use the train_and_predict.py file in the examples. All you need are the SMILES of the two molecules and the co-crystallization outcome (see train.csv in the data folder).
+> [!IMPORTANT]
+> The `deepcocrystal-trained` model provided here is trained only on non-proprietary data to allow a permissive license (560 less API-coformer pairs). The accuracy of this model is 75% and the sensitivity is 70%.
 
 
 ##  Closing Remarks :fireworks: 
