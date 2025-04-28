@@ -2,6 +2,9 @@
 
 Welcome to [DeepCocrystal](https://chemrxiv.org/engage/chemrxiv/article-details/66704f0501103d79c56770b2), a predictive model that will help you select promising coformers for your co-crystallization trails, simply from the SMILES of your molecules. 
 
+> [!IMPORTANT]
+> If you prefer to try it out directly without setting up the code, check out the easy-to-use web application here: [https://deepcocrystal.streamlit.app/](https://deepcocrystal.streamlit.app/)
+
 Let's get started!  :sparkles:
 
 ## Installation :hammer_and_wrench:
