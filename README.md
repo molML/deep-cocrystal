@@ -100,8 +100,11 @@ Thanks again for finding our code interesting! Please consider starring the repo
 ```bibtex
 @article{birolo2024deep,
   title={Deep Supramolecular Language Processing for Co-crystal Prediction},
-  author={Birolo, Rebecca and {\"O}z{\c{c}}elik, R{\i}za and Aramini, Andrea and Gobetto, Roberto and Chierotti, Michele Remo and Grisoni, Francesca},
-  year={2024}
+  author={Birolo, Rebecca and {\"O}z{\c{c}}elik, R{\i}za and Aramini, Andrea and Chierotti, Michele and Gobetto, Roberto and Grisoni, Francesca},
+  journal={Angewandte Chemie International Edition},
+  pages={e202507835},
+  year={2024},
+  publisher={Wiley Online Library}
 }
 ```
 
